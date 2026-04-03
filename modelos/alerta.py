@@ -1,18 +1,15 @@
+import random
+
 class Alerta:
-    def _init_(self, id_alerta, tipo, mensaje, ubicacion, nivel_riesgo):
+    def __init__(self, id_alerta: int, tipo: str, mensaje: str, nivel_riesgo: int):
         self.id_alerta = id_alerta
-        self.tipo = tipo
+        self.tipo = tipo # Ejemplo: 'Foto-multa', 'Retén', 'Accidente'
         self.mensaje = mensaje
-        self.ubicacion = ubicacion
-        self.nivel_riesgo = nivel_riesgo
+        self.nivel_riesgo = nivel_riesgo # Del 1 al 5
 
-    def mostrar_alerta(self):
-        return (
-            f"[ALERTA {self.id_alerta}] {self.tipo}\n"
-            f"Mensaje: {self.mensaje}\n"
-            f"Ubicación: {self.ubicacion}\n"
-            f"Nivel de riesgo: {self.nivel_riesgo}"
-        )
-
-    def _str_(self):
-        return f"{self.tipo} - {self.mensaje}"
+    def analizar_riesgo_ia(self) -> str:
+        # Simulación de IA que predice probabilidad de multa
+        probabilidad = (self.nivel_riesgo * 0.15) + random.random()
+        if probabilidad > 0.7:
+            return "ALTO RIESGO: Se recomienda cambiar de ruta inmediatamente."
+        return "Riesgo moderado: Conduzca con precaución."
