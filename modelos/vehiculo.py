@@ -1,5 +1,5 @@
 class Vehiculo:
-    def _init_(self, placa, tipo, marca, modelo, color):
+    def __init__(self, placa, tipo, marca, modelo, color): # Corregido: doble guion bajo
         self.placa = placa
         self.tipo = tipo
         self.marca = marca
@@ -15,5 +15,5 @@ class Vehiculo:
             f"Color: {self.color}"
         )
 
-    def _str_(self):
-        return f"{self.tipo} - {self.placa} ({self.marca} {self.modelo})
+    def __str__(self): # Corregido: doble guion bajo
+        return f"{self.tipo} - {self.placa} ({self.marca} {self.modelo})"
