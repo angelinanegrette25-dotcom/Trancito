@@ -1,5 +1,6 @@
 class Usuario:
-    def __init__(self, id_usuario, nombre, correo): 
+    def __init__(self, id_usuario, nombre, correo):
+        self.id_usuario = id_usuario
         self.nombre = nombre
         self.correo = correo
         self.vehiculos = []
@@ -14,8 +15,7 @@ class Usuario:
     def mostrar_vehiculos(self):
         if not self.vehiculos:
             return "El usuario no tiene vehículos registrados."
-        # Esto llama al __str__ de cada objeto Vehiculo
         return "\n".join(str(vehiculo) for vehiculo in self.vehiculos)
 
-    def __str__(self): # Corregido: __str__
+    def __str__(self):
         return f"Usuario {self.id_usuario}: {self.nombre}"
