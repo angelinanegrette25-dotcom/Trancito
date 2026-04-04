@@ -1,9 +1,9 @@
+
 from modelos.trayecto import Trayecto
 from modelos.alerta import Alerta
 
-
 class SistemaTransitoInteligente:
-    def _init_(self):
+    def __init__(self): 
         self.usuarios = []
         self.trayectos = []
         self.alertas = []
@@ -25,14 +25,23 @@ class SistemaTransitoInteligente:
         return False
 
     def iniciar_trayecto(self, id_trayecto, usuario, vehiculo, ruta):
+        # Creamos el objeto Trayecto vinculando todas las piezas
         trayecto = Trayecto(id_trayecto, usuario, vehiculo, ruta)
         self.trayectos.append(trayecto)
+        # Importante: Guardamos el viaje en el historial del usuario
         usuario.agregar_trayecto(trayecto)
         return trayecto
 
-    def generar_alerta(self, id_alerta, tipo, mensaje, ubicacion, nivel_riesgo, trayecto):
+    def generar_alerta_ia(self, id_alerta, tipo, mensaje, ubicacion, nivel_riesgo, trayecto):
+        # Creamos la alerta
         alerta = Alerta(id_alerta, tipo, mensaje, ubicacion, nivel_riesgo)
+        
+        # Invocamos la funcionalidad IA Predictiva
+        probabilidad = alerta.analizar_riesgo_ia()
+        alerta.mensaje += f" [Riesgo detectado por IA: {probabilidad}%]"
+        
         self.alertas.append(alerta)
+        # La alerta se suma al trayecto actual
         trayecto.agregar_alerta(alerta)
         return alerta
 
@@ -40,29 +49,19 @@ class SistemaTransitoInteligente:
         if not self.usuarios:
             return "No hay usuarios registrados."
 
-        texto = ""
+        texto = "=== REPORTE DE USUARIOS Y FLOTA ===\n"
         for usuario in self.usuarios:
             texto += f"{usuario}\n"
-            texto += "Vehículos:\n"
-
-            if usuario.vehiculos:
-                for vehiculo in usuario.vehiculos:
-                    texto += f"  - {vehiculo}\n"
-            else:
-                texto += "  - No tiene vehículos registrados.\n"
-
-            texto += "\n"
-
+            texto += "Vehículos registrados:\n"
+            texto += f"{usuario.mostrar_vehiculos()}\n"
+            texto += "-" * 30 + "\n"
         return texto
-
 
     def mostrar_trayectos(self):
         if not self.trayectos:
-            return "No hay trayectos registrados."
+            return "No hay trayectos registrados en el historial."
 
-        texto = ""
-    
+        texto = "=== HISTORIAL DE TRAYECTOS ACTIVOS ===\n"
         for trayecto in self.trayectos:
-            texto += str(trayecto) + "\n"
-    
+            texto += f"{trayecto}\n" # Esto usa el __str__ de Trayecto
         return texto
