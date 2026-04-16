@@ -2,20 +2,18 @@ import random
 
 
 class Alerta:
-    def __init__(self, id_alerta, tipo, mensaje, ubicacion, nivel_riesgo):
-        self.id_alerta = id_alerta
+    def __init__(self, tipo, mensaje, nivel_riesgo):
         self.tipo = tipo
         self.mensaje = mensaje
-        self.ubicacion = ubicacion
         self.nivel_riesgo = nivel_riesgo
 
-    def analizar_riesgo(self):
-        probabilidad = (self.nivel_riesgo * 15) + random.randint(1, 20)
+    def calcular_riesgo(self):
+        riesgo = self.nivel_riesgo * 20 + random.randint(0, 10)
 
-        if probabilidad > 100:
-            probabilidad = 100
+        if riesgo > 100:
+            riesgo = 100
 
-        return probabilidad
+        return riesgo
 
     def __str__(self):
-        return f"{self.tipo} - Riesgo {self.nivel_riesgo}"
+        return f"{self.tipo}: {self.mensaje} - Riesgo {self.calcular_riesgo()}%"

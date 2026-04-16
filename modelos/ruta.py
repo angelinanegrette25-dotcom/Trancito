@@ -1,0 +1,22 @@
+class Ruta:
+    def __init__(self, id_ruta, origen, destino, distancia_km):
+        self.id_ruta = id_ruta
+        self.origen = origen
+        self.destino = destino
+        self.distancia_km = distancia_km
+        self.puntos = []
+
+    def agregar_punto(self, ubicacion):
+        self.puntos.append(ubicacion)
+
+    def mostrar_ruta(self):
+        texto = f"Ruta: {self.origen} -> {self.destino}\n"
+        texto += f"Distancia: {self.distancia_km} km\n"
+
+        for punto in self.puntos:
+            texto += f"- {punto}\n"
+
+        return texto
+
+    def __str__(self):
+        return f"{self.origen} -> {self.destino}"
