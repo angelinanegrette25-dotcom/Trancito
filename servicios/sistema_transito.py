@@ -3,12 +3,15 @@ from modelos.alerta import Alerta
 
 
 class SistemaTransito:
+
     def __init__(self):
+
         self.usuarios = []
         self.trayectos = []
         self.alertas = []
 
     def registrar_usuario(self, usuario):
+
         self.usuarios.append(usuario)
 
     def buscar_usuario(self, id_usuario):
@@ -24,12 +27,12 @@ class SistemaTransito:
 
         usuario = self.buscar_usuario(id_usuario)
 
-        if usuario:
-            usuario.agregar_vehiculo(vehiculo)
+        if usuario is None:
+            return False
 
-            return True
+        usuario.agregar_vehiculo(vehiculo)
 
-        return False
+        return True
 
     def crear_trayecto(
         self,
@@ -54,19 +57,15 @@ class SistemaTransito:
 
     def generar_alerta(
         self,
-        id_alerta,
         tipo,
         mensaje,
-        ubicacion,
         nivel_riesgo,
         trayecto
     ):
 
         alerta = Alerta(
-            id_alerta,
             tipo,
             mensaje,
-            ubicacion,
             nivel_riesgo
         )
 
@@ -84,6 +83,8 @@ class SistemaTransito:
         texto = ""
 
         for usuario in self.usuarios:
+
             texto += str(usuario) + "\n"
+            texto += usuario.mostrar_vehiculos() + "\n"
 
         return texto

@@ -1,7 +1,3 @@
-geopy
-colorama
-pytest
-
 class GestorZonas:
     def __init__(self):
         self.zonas = []
@@ -14,7 +10,6 @@ class GestorZonas:
             return "No hay zonas registradas"
 
         texto = ""
-
         for zona in self.zonas:
             texto += str(zona) + "\n"
 

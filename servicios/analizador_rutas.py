@@ -3,16 +3,14 @@ class AnalizadorRutas:
         alertas = []
 
         for punto in ruta.puntos:
-
             for zona in zonas:
-
-                distancia = punto.calcular_distancia(
-                    zona.ubicacion
-                )
+                distancia = punto.calcular_distancia(zona.ubicacion)
 
                 if distancia <= 1:
-                    alertas.append(
-                        f"Alerta cerca de {zona.tipo_control}"
+                    mensaje = (
+                        f"Cerca de {zona.tipo_control}. "
+                        f"Límite permitido: {zona.limite_velocidad} km/h"
                     )
+                    alertas.append(mensaje)
 
         return alertas
