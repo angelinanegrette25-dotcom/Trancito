@@ -88,3 +88,18 @@ class SistemaTransito:
             texto += usuario.mostrar_vehiculos() + "\n"
 
         return texto
+
+    def iniciar_sesion(self, correo, contraseña):
+
+        for usuario in self.usuarios:
+
+            if (
+                    usuario.correo == correo
+                    and
+                    usuario.contraseña == contraseña
+            ):
+                return usuario
+
+        return None
+
+    

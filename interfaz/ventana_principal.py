@@ -46,6 +46,16 @@ class VentanaPrincipal:
 
         boton_usuario.pack(pady=5)
 
+        boton_login = tk.Button(
+            self.ventana,
+            text="Iniciar sesion",
+            width=30,
+            command=self.iniciar_sesion
+        )
+
+        boton_login.pack(pady=5)
+
+
         boton_vehiculo = tk.Button(
             self.ventana,
             text="Registrar vehiculo",
@@ -125,6 +135,63 @@ class VentanaPrincipal:
         entrada_nombre.grid(row=1, column=1)
         entrada_correo.grid(row=2, column=1)
         entrada_contraseña.grid(row=3, column=1)
+
+        def iniciar_sesion(self):
+
+            ventana = tk.Toplevel()
+
+            ventana.title("Iniciar sesion")
+
+            tk.Label(
+                ventana,
+                text="Correo"
+            ).grid(row=0, column=0)
+
+            tk.Label(
+                ventana,
+                text="Contraseña"
+            ).grid(row=1, column=0)
+
+            entrada_correo = tk.Entry(ventana)
+
+            entrada_contraseña = tk.Entry(
+                ventana,
+                show="*"
+            )
+
+            entrada_correo.grid(row=0, column=1)
+            entrada_contraseña.grid(row=1, column=1)
+
+            def validar():
+
+                usuario = self.sistema.iniciar_sesion(
+                    entrada_correo.get(),
+                    entrada_contraseña.get()
+                )
+
+                if usuario:
+
+                    messagebox.showinfo(
+                        "Correcto",
+                        f"Bienvenido {usuario.nombre}"
+                    )
+
+                    ventana.destroy()
+
+                else:
+
+                    messagebox.showerror(
+                        "Error",
+                        "Correo o contraseña incorrectos"
+                    )
+
+            boton_ingresar = tk.Button(
+                ventana,
+                text="Ingresar",
+                command=validar
+            )
+
+            boton_ingresar.grid(row=2, column=1)
 
         def guardar():
 
@@ -310,3 +377,4 @@ class VentanaPrincipal:
     def ejecutar(self):
 
         self.ventana.mainloop()
+
