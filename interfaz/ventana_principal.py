@@ -12,6 +12,9 @@ from servicios.gestor_zonas import GestorZonas
 
 class VentanaPrincipal:
 
+    def iniciar_sesion(self):
+        print("Iniciando sesión...")
+
     def __init__(self):
 
         self.sistema = SistemaTransito()
